@@ -13,8 +13,8 @@ pipeline {
     post {
 	    always {
         	cleanWs()
-    	}
-    	success {
+    	    }
+    	    success {
 	    	slackSend baseUrl: 'https://aionsh.slack.com/services/hooks/jenkins-ci/', 
 			channel: '@yuanjun', 
 			color: 'good', 
@@ -29,7 +29,7 @@ pipeline {
 			color: 'danger', 
 			message: "The pipeline ${currentBuild.fullDisplayName} failed at ${env.BUILD_URL}",
 			teamDomain: 'aionsh', 
-			token: 'wG5SRL6unTjd9o4XS90MfHZT',
+			token: 'wG5SRL6unTjd9o4XS90MfHZT'
 				
 	    }
     }
