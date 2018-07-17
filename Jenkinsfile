@@ -5,14 +5,24 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh 'Hello World'
+                sh 'cd hello_world & cargo run '
             }
         }
     }
  
     post {
-        always {
-            sh 'Hello World'
-        }
+	    always {
+        	cleanWs()
+    	}
+    	success {
+	    	slackSend channel: '@yuanjun',
+			  color: 'good',
+			  message: "The pipeline ${currentBuild.fullDisplayName} completed successfully. Grab the generated builds at ${env.BUILD_URL}"
+	    } 
+	    failure {
+	    	slackSend channel: '@yuanjun',
+			  color: 'danger', 
+			  message: "The pipeline ${currentBuild.fullDisplayName} failed at ${env.BUILD_URL}"
+	    }
     }
 }
