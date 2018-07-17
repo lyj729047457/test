@@ -5,7 +5,8 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh 'cd hello_world & cargo run '
+                sh 'cd hello_world'
+		sh 'cargo run'
             }
         }
     }
